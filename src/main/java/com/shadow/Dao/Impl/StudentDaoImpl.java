@@ -2,7 +2,6 @@ package com.shadow.Dao.Impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 
 import com.shadow.Base.StudentBaseImpl;
@@ -14,9 +13,16 @@ import com.sun.org.apache.xpath.internal.operations.String;
 public class StudentDaoImpl extends StudentBaseImpl<StudentEntity> implements StudentDao{
 
 	@Override
-	public List<StudentEntity> QueryList(String sql,Class<StudentEntity> clazz) {
+	public List<StudentEntity> QueryList(java.lang.String sql, Class<StudentEntity> clazz, int first, int max) {
 		// TODO Auto-generated method stub
-		return QueryList(sql,clazz);
+		return super.QueryList(sql, clazz, first, max);
+	}
+	
+	@Override
+	public int QUeryMax(java.lang.String sql) {
+		// TODO Auto-generated method stub
+		int max=super.QUeryMax(sql);
+		return max;
 	}
 
 	@Override
@@ -36,6 +42,8 @@ public class StudentDaoImpl extends StudentBaseImpl<StudentEntity> implements St
 		// TODO Auto-generated method stub
 		super.StudentUpdate(s);
 	}
+
+
 
 	
 	

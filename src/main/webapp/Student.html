@@ -21,6 +21,9 @@
 	 			toolbar:"#toolbar",
 	 			onDblClickRow:DBEditRow,
 	 			onClickRow:onClick,
+	 			pageList:[5,10,15,20],
+				pageSize:5,
+				pagination:true,
 	 			columns:[[
 	 				{field:"sid",title:"sid",align:"center",width:120},
 	 				{field:"sname",title:"sname",align:"center",width:120,editor:"textbox"},
@@ -80,8 +83,9 @@
 	 			dataType:"json",
 	 			data:onClickRowData
 	 		})
+	 		$("#table").datagrid('deleteRow',onClickRowIndex);
 	 	}
-	 	$("#table").datagrid('deleteRow',onClickRowIndex);
+	 	
 	 </script>
 </head>
 <body class="easyui-layout">

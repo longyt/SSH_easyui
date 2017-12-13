@@ -9,13 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
 import com.shadow.Entity.StudentEntity;
+import com.sun.org.apache.xpath.internal.operations.String;
 
 public class StudentBaseImpl<S> extends InitSession{
 	
-	public List<S> QueryList(java.lang.String sql,Class<S> clazz){
+	public List<S> QueryList(java.lang.String sql,Class<S> clazz,int first,int max){
 		OpenSession();
-		List<S> list = session.createQuery("from "+sql,clazz).getResultList();
+		List<S> list = session.createQuery("from "+sql,clazz).setFirstResult(first).setMaxResults(max).getResultList();
 		return list;
+	}
+	
+	public int QUeryMax(java.lang.String sql){
+		OpenSession();
+		BeginTransaction();
+		int max = (int) session.createQuery(sql).uniqueResult();
+		TransactionCommit();
+		SessionClose();
+		return max;
 	}
 	
 	public void StudentInsert(S s){
@@ -47,6 +57,7 @@ public class StudentBaseImpl<S> extends InitSession{
 		TransactionCommit();
 		SessionClose();
 	}
+
 
 	
 		

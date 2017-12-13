@@ -19,9 +19,15 @@ public class StudentServiceImpl extends StudentBaseImpl<StudentEntity>  implemen
 	StudentDao studentDao;
 	
 	@Override
-	public List<StudentEntity> QueryList(String sql,Class<StudentEntity> clazz) {
+	public List<StudentEntity> QueryList(java.lang.String sql, Class<StudentEntity> clazz, int first, int max) {
 		// TODO Auto-generated method stub
-		return studentDao.QueryList(sql,clazz);
+		return studentDao.QueryList(sql, clazz, first, max);
+	}
+	
+	@Override
+	public int QUeryMax(java.lang.String sql) {
+		// TODO Auto-generated method stub
+		return studentDao.QUeryMax(sql);
 	}
 	
 	@Override

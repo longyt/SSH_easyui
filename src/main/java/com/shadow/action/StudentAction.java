@@ -1,6 +1,8 @@
 package com.shadow.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,8 +30,19 @@ public class StudentAction extends ServletApi{
 	@Action(value="QueryStudent")
 	public void QueryStudentList() throws Exception{
 		List<StudentEntity> list = studentService.QueryList("Student",StudentEntity.class);
-		write(JSON.toJSONString(list));
-		studentService.SessionClose();
+		getReqRes();
+		String page = getRequest().getParameter("page");
+		String  rows= getRequest().getParameter("rows");
+		int first = (Integer.parseInt(page)-1)*Integer.parseInt(rows);
+		int max = Integer.parseInt(page)*Integer.parseInt(rows);
+		
+		int maxid = studentService.QUeryMax("select max(s.sid) from Student s");
+		System.out.println("first="+first+"___"+"max="+max+"maxid="+maxid);
+		List<StudentEntity> list = studentService.QueryList("Student",StudentEntity.class,first,max);
+		Map<String, Object> map =new HashMap<>();
+		map.put("total", maxid);
+		map.put("rows", list);
+		write(JSON.toJSONString(map));
 	}
 	
 	@Action("DelteStudent")
