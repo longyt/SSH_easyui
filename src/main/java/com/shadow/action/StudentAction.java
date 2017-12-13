@@ -29,7 +29,6 @@ public class StudentAction extends ServletApi{
 	
 	@Action(value="QueryStudent")
 	public void QueryStudentList() throws Exception{
-		List<StudentEntity> list = studentService.QueryList("Student",StudentEntity.class);
 		getReqRes();
 		String page = getRequest().getParameter("page");
 		String  rows= getRequest().getParameter("rows");
